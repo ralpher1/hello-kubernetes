@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: simple-fanout-example
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    #nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    # - host: foo.bar.com
+  - host: 
+    http:
+      paths:
+      - path: /foo
+        backend:
+          serviceName: nginx
+          servicePort: 80
+      - path: /dash
+        backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 443
+      - path: /bar
+        backend:
+          serviceName: hello-kubernetes 
+          servicePort: 80
+
+
+          
